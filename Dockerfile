@@ -41,9 +41,11 @@ VOLUME ["/var/logs", "/var/swoft/runtime/logs"]
 
 WORKDIR /var/www/swoft
 
-RUN composer install --no-dev \
-    && mv -vr ./depend/service-governance  ./vendor/swoft/component/src/service-governance \
-    && composer dump-autoload -o \
+# 因为swoft2包管理没有上传，只有在github上，所以打包时需要一个token，目前这个token是我的,只有拉取数据的权限
+RUN composer config --global --auth github-oauth.github.com e7a35bf77f2efb01a5f43022553471487013235f
+RUN composer install --no-dev
+RUN mv -vr ./depend/service-governance  ./vendor/swoft/component/src/service-governance
+RUN composer dump-autoload -o \
     && composer clearcache
 
 EXPOSE 9501
