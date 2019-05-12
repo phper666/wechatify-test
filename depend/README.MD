@@ -1,0 +1,2 @@
+解决composer require swoft/service-governance慢的问题。
+把依赖下载到这个目录，在打包镜像到时候移动到vendor中，运行composer dump-autoload来加载该依赖，把service-governance移动到vendor/swoft/component/src里面。因为官网这个组件目前没在维护，后期需要我们团队来维护，需要加入删除consul垃圾服务，加入etld等驱动。这个后期做，然后打包成上传到https://packagist.org/，使用composer来加载依赖。
