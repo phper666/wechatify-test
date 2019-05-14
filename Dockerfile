@@ -37,7 +37,7 @@ RUN set -ex \
 
 # 这里后面需要改下
 ADD . /var/www/swoft
-VOLUME ["/var/logs", "/var/swoft/runtime/logs"]
+VOLUME ["/var/logs", "/var/www/swoft/runtime/logs"]
 
 WORKDIR /var/www/swoft
 
