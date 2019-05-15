@@ -43,11 +43,14 @@ WORKDIR /var/www/swoft
 
 # 因为swoft2包管理没有上传，只有在github上，所以打包时需要一个token，目前这个token是我的github,只有拉取数据的权限
 RUN composer config --global --auth github-oauth.github.com e7a35bf77f2efb01a5f43022553471487013235f
-RUN composer install --no-dev
+#RUN composer install --no-dev
 #RUN cp -r depend/service-governance  vendor/swoft/component/src/service-governance
-RUN composer dump-autoload -o \
+#RUN composer dump-autoload -o \
+#    && composer clearcache
+RUN composer install --no-dev \
+    && composer dump-autoload -o \
     && composer clearcache
 
 EXPOSE 9501
 
-CMD /run.sh
+ENTRYPOINT ["php", "/var/www/swoft/bin/swoft", "start"]
